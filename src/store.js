@@ -44,6 +44,12 @@ const store = {
 
     delete localStore[id]
     return localStore
+  },
+
+  clear() {
+    for (let k in localStore) {
+      delete localStore[k]
+    }
   }
 }
 
