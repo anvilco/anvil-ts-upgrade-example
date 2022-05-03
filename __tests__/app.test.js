@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../src/app')
+import app  from '../src/app'
 
 describe(`'/' route`, function () {
   it('works', function () {

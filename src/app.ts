@@ -1,6 +1,6 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const store = require('./store.js')
+import store from './store'
+import express from 'express'
+import bodyParser from 'body-parser'
 
 const app = express()
 
@@ -10,12 +10,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.get('/', function (req, res) {
+app.get('/', function (_, res) {
   res.send('Hello')
 })
 
 app.route('/items')
-  .get(function (req, res) {
+  .get(function (_, res) {
     res.json(store.getAll())
   })
   .post(function (req, res) {
@@ -29,15 +29,15 @@ app.route('/items')
   })
 
 app.route('/items/:item_id')
-  .get(function(req, res) {
+  .get(function (req, res) {
     const itemId = parseInt(req.params.item_id, 10)
     const item = store.get(itemId)
     res.json(item)
   })
-  .delete(function(req, res) {
+  .delete(function (req, res) {
     const itemId = parseInt(req.params.item_id, 10)
     const newStore = store.remove(itemId)
     res.json(newStore)
   })
 
-module.exports = app
+export default app

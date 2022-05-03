@@ -1,4 +1,4 @@
-const store = require('../src/store')
+import store from '../src/store'
 
 describe('store', function () {
   beforeEach(function () {

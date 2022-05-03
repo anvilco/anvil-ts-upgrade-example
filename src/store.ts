@@ -1,7 +1,7 @@
-const TodoModel = require('./models/Todo')
+import Todo, { TodoData } from './models/Todo'
 
 interface LocalAppStore {
-  [key: number]: typeof TodoModel
+  [key: number]: Todo
 }
 
 const localStore: LocalAppStore = {}
@@ -14,7 +14,7 @@ const store = {
     return Object.values(localStore)
   },
 
-  get(id) {
+  get(id: number) {
     const item = localStore?.[id]
     if (!item) {
       throw new StoreException('Cannot remove an item that does not exist')
@@ -22,13 +22,13 @@ const store = {
     return item
   },
 
-  add(data) {
-    const newItem = new TodoModel(data)
+  add(data: TodoData) {
+    const newItem = new Todo(data)
     localStore[newItem.id] = newItem
     return newItem
   },
 
-  update(id, data) {
+  update(id: number, data: TodoData) {
     let item = localStore?.[id]
     if (!item) {
       throw new StoreException('Cannot update an item that does not exist')
@@ -40,7 +40,7 @@ const store = {
     return item
   },
 
-  remove(id) {
+  remove(id: number) {
     const item = localStore?.[id]
     if (!item) {
       throw new StoreException('Cannot remove an item that does not exist')
@@ -57,4 +57,4 @@ const store = {
   }
 }
 
-module.exports = store
+export default store
