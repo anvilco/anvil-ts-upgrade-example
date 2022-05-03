@@ -1,6 +1,10 @@
 const TodoModel = require('./models/Todo')
 
-const localStore = {}
+interface LocalAppStore {
+  [key: number]: typeof TodoModel
+}
+
+const localStore: LocalAppStore = {}
 
 class StoreException extends Error {
 }
